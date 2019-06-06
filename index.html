@@ -1,0 +1,33 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
+  <section>
+    <button v-on:click="addOhohoi">おほほい！</button>
+  </section>
+  <section>
+    <p v-for="ohohoi in ohohois">
+      {{ ohohoi }}
+    </p>
+  </section>
+</div>
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    ohohois: [
+      'おほほい！'
+    ]
+  },
+  methods: {
+    addOhohoi: function() {
+      this.ohohois.push('おほほい！')
+    }
+  }
+})
+</script>
+
+<style>
+p {
+  display: inline;
+}
+</style>
