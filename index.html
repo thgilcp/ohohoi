@@ -1,10 +1,13 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
 <div id="app">
   <section>
     <button v-on:click="addOhohoi">おほほい！</button>
     <p>おほほい！× {{ ohohoisCount }}</p>
     <p>/</p>
     <p>ぱいーん！× {{ painCount }}</p>
+    <p>/</p>
+    <p>マックスおほほい！× {{ maxCount }}</p>
   </section>
   <section>
     <p v-for="ohohoi in ohohois">
@@ -18,22 +21,28 @@ var app = new Vue({
   el: '#app',
   data: {
     ohohois: [
-    ]
+    ],
+    painCount: 0,
+    maxCount: 0,
   },
   computed: {
     ohohoisCount: function() {
       return this.ohohois.filter(x => x === 'おほほい！').length
-    },
-    painCount: function() {
-      return this.ohohois.length - this.ohohoisCount
     }
   },
   methods: {
     addOhohoi: function() {
       if (Math.floor(Math.random() * 10) === 1) {
-        this.ohohois.push('ぱいーん！')
+        this.ohohois = ['ぱいーん！']
+        this.painCount++
       } else {
+        if (this.ohohois[0] === 'ぱいーん！') {
+          this.ohohois = []
+        }
         this.ohohois.push('おほほい！')
+        if (this.maxCount < this.ohohoisCount) {
+          this.maxCount = this.ohohoisCount
+        }
       }
     }
   }
