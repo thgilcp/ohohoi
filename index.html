@@ -2,11 +2,14 @@
 <div id="app">
   <section>
     <button v-on:click="addOhohoi">おほほい！</button>
+    <p>おほほい！× {{ ohohoisCount }}</p>
+    <p>/</p>
+    <p>ぱいーん！× {{ painCount }}</p>
   </section>
   <section>
     <p v-for="ohohoi in ohohois">
-    {{ ohohoi }}
-  </p>
+      {{ ohohoi }}
+    </p>
   </section>
 </div>
 
@@ -17,9 +20,21 @@ var app = new Vue({
     ohohois: [
     ]
   },
+  computed: {
+    ohohoisCount: function() {
+      return this.ohohois.filter(x => x === 'おほほい！').length
+    },
+    painCount: function() {
+      return this.ohohois.length - this.ohohoisCount
+    }
+  },
   methods: {
     addOhohoi: function() {
-      this.ohohois.push('おほほい！')
+      if (Math.floor(Math.random() * 10) === 1) {
+        this.ohohois.push('ぱいーん！')
+      } else {
+        this.ohohois.push('おほほい！')
+      }
     }
   }
 })
